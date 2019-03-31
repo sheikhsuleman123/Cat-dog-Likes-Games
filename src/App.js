@@ -70,10 +70,21 @@ class App extends Component {
     catResult = 'LOSER';
     dogResult = 'WINNER';
     }
+  this.setState({
+    catResult : catResult,
+    dogResult : dogResult
+  })
+
   }
 
   handleStrtOverbtn(){
-    alert('hallo over again')
+    this.setState({
+      catLikeCount : 0,
+      dogLikeCount : 0,
+      catResult: '',
+      dogResult: ''
+    
+    })
   }
 
   render() {
@@ -98,6 +109,7 @@ class App extends Component {
         <center>
         <PetComponent
          petName="Cat" 
+         result = {this.state.catResult}
          likesCount = {this.state.catLikeCount}
          petUrl="http://4.bp.blogspot.com/-MzZCzWI_6Xc/UIUQp1qPfzI/AAAAAAAAHpA/OTwHCJSWFAY/s640/cats_animals_kittens_cat_kitten_cute_desktop_1680x1050_hd-wallpaper-753974.jpeg"
          onLikedClick = {this.handleLikedClick}
@@ -106,6 +118,7 @@ class App extends Component {
         
         <PetComponent 
         petName="Dog" 
+        result = {this.state.dogResult}
         likesCount = {this.state.dogLikeCount}
         petUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo60jqQ-RWki67TBFZ784DEqocUFtncruOCyikfm3XeX_kg0ve"
         onLikedClick = {this.handleLikedClick}
