@@ -31,7 +31,11 @@ import React from 'react'
   return (
     <div style={style}>
     {result}
-      <h3>{props.petName } likes: {props.likesCount}</h3>
+    {(props.result) ? (
+      <h3>{props.petName} Likes: {props.likesCount}</h3>
+    ) : (
+    <h3>{props.petName}</h3>
+    )}
       <img style={{height:300,weight:300}} src={props.petUrl} alt={props.petName + 'component'}/>
    <br />  
     <button style={btn} disabled={disable} value={props.petName} onClick={props.onLikedClick}>Like </button> 
