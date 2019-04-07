@@ -36,7 +36,7 @@ import React from 'react'
     ) : (
     <h3>{props.petName}</h3>
     )}
-      <img style={{height:300,weight:300}} src={props.petUrl} alt={props.petName + 'component'}/>
+      <img style={{height:350,weight:350}} src={props.petUrl} alt={props.petName + 'component'}/>
    <br />  
     <button style={btn} disabled={disable} value={props.petName} onClick={props.onLikedClick}>Like </button> 
     <button style={btn} disabled={disable} value={props.petName} onClick={props.onDisLikedClick}> DisLike </button>

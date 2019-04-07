@@ -5,8 +5,8 @@ import axios from 'axios';
 
   var API_KEY = '123456789';
   
-  var CAT_URL = 'http://localhost:63000/cat/?api_key=123456789';
-  var DOG_URL = 'http://localhost:63000/dog/?api_key=123456789'
+  var CAT_URL = 'http://localhost:63000/cat/?api_key=' + API_KEY ;
+  var DOG_URL = 'http://localhost:63000/dog/?api_key=' + API_KEY ;
 
 
 class App extends Component {
@@ -25,6 +25,11 @@ class App extends Component {
    this.handleShowWinnerbtn = this.handleShowWinnerbtn.bind(this);
  }
 
+  componentDidMount() {
+    this.fetchCatImage();
+    this.fetchDogImage();
+  }
+
   fetchCatImage () {
     axios.get(CAT_URL)
     .then(function(resp){
@@ -35,20 +40,20 @@ class App extends Component {
             cat: {likesCount: prevState.cat.likesCount, result: prevState.cat.result, imageUrl: imageUrl }
         };
       });
-    });
+    }.bind(this));
   }
  
-  fetchCatImage () {
-    axios.get(CAT_URL)
+  fetchDogImage () {
+    axios.get(DOG_URL)
     .then(function(resp){
       var imageUrl = resp.data.imageUrl;
 
       this.setState(function(prevState) {
         return {
-            cat: {likesCount: prevState.cat.likesCount, result: prevState.cat.result, imageUrl: imageUrl }
+            dog: {likesCount: prevState.dog.likesCount, result: prevState.dog.result, imageUrl: imageUrl }
         };
       });
-    });
+    }.bind(this));
   }
  
  handleLikedClick(e) {
@@ -57,13 +62,13 @@ class App extends Component {
    if(petName === 'Cat'){
      this.setState(function(prevState){
        return {
-         cat: {likesCount: prevState.cat.likesCount+1, result: prevState.cat.result }
+         cat: {likesCount: prevState.cat.likesCount+1, result: prevState.cat.result , imageUrl:prevState.cat.imageUrl }
        };
      });
    }  else if (petName === 'Dog') {
      this.setState(function(prevState){
        return {
-        dog: {likesCount: prevState.dog.likesCount+1, result: prevState.dog.result }
+        dog: {likesCount: prevState.dog.likesCount+1, result: prevState.dog.result, imageUrl:prevState.dog.imageUrl }
        };
      });
    }
@@ -74,12 +79,12 @@ class App extends Component {
   if(petName === 'Cat'){
     this.setState(function(prevState){
       return {
-        cat: {likesCount: prevState.cat.likesCount - 1, result: prevState.cat.result }     };
+        cat: {likesCount: prevState.cat.likesCount - 1, result: prevState.cat.result, imageUrl:prevState.cat.imageUrl }     };
     });
   }  else if (petName === 'Dog') {
     this.setState(function(prevState){
       return {
-        dog: {likesCount: prevState.dog.likesCount - 1, result: prevState.dog.result }   };
+        dog: {likesCount: prevState.dog.likesCount - 1, result: prevState.dog.result,imageUrl:prevState.dog.imageUrl }   };
     });
   }
 }
@@ -101,9 +106,9 @@ class App extends Component {
   
     this.setState(function(prevState) {
       return {
-        cat : {likesCount: prevState.cat.likesCount, result: catResult },
+        cat : {likesCount: prevState.cat.likesCount, result: catResult, imageUrl: prevState.cat.imageUrl },
       
-        dog : {likesCount: prevState.dog.likesCount, result: dogResult }
+        dog : {likesCount: prevState.dog.likesCount, result: dogResult, imageUrl: prevState.dog.imageUrl }
       }
     })
 
@@ -111,8 +116,8 @@ class App extends Component {
 
   handleStrtOverbtn(){
     this.setState({
-      cat : {likesCount: 0 , result:''},
-      dog : {likesCount: 0 , result:''}
+      cat : {likesCount: 0 , result:'', imageUrl: ''},
+      dog : {likesCount: 0 , result:'', imageUrl: ''}
      
     })
   }
